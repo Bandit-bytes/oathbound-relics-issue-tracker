@@ -13,10 +13,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Tiny dependency-free Blockbench keyframe player used by the Rite of Severance altar.
- * The source data is generated directly from the original .bbmodel animations.
- */
 public final class NativeAltarAnimations {
     private static final Gson GSON = new Gson();
     private static final Map<String, Animation> BASE = new HashMap<>();
@@ -24,7 +20,7 @@ public final class NativeAltarAnimations {
 
     static {
         try (var in = NativeAltarAnimations.class.getResourceAsStream(
-                "/assets/oathboundrelics/animations/rite_of_severance.json")) {
+                "/assets/oathboundrelics/native_animations/rite_of_severance.json")) {
             if (in == null) {
                 OathboundRelicsMod.LOGGER.error("Missing native altar animation data");
             } else {
@@ -33,7 +29,7 @@ public final class NativeAltarAnimations {
                 readSet(root.getAsJsonObject("aura"), AURA);
             }
         } catch (Exception e) {
-            OathboundRelicsMod.LOGGER.error("Failed to load native altar animations", e);
+            OathboundRelicsMod.LOGGER.error("Failed to load native altar native_animations", e);
         }
     }
 
@@ -61,14 +57,12 @@ public final class NativeAltarAnimations {
             BoneAnimation bone = entry.getValue();
             if (bone.position != null) {
                 Vector3f v = bone.position.sample(time);
-                // Blockbench uses +Y up; ModelPart uses +Y down.
                 part.x += v.x();
                 part.y -= v.y();
                 part.z += v.z();
             }
             if (bone.rotation != null) {
                 Vector3f v = bone.rotation.sample(time);
-                // Reflect Blockbench's Y-up coordinate system into ModelPart coordinates.
                 part.xRot += (float) Math.toRadians(-v.x());
                 part.yRot += (float) Math.toRadians(v.y());
                 part.zRot += (float) Math.toRadians(-v.z());

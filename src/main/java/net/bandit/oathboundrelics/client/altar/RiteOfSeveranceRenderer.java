@@ -11,7 +11,6 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 
-/** Renders the original animated Blockbench altar with vanilla Minecraft rendering only. */
 public final class RiteOfSeveranceRenderer implements BlockEntityRenderer<RiteOfSeveranceBlockEntity> {
     private static final ResourceLocation BODY = tex("wave_altar_hell.png");
     private static final ResourceLocation LIGHT_RED = tex("altar_lights_red.png");
@@ -62,7 +61,6 @@ public final class RiteOfSeveranceRenderer implements BlockEntityRenderer<RiteOf
                 applyAll("dial_spin", idleSeconds);
                 applyAuraAll("idle", idleSeconds);
 
-                // The original wave animation is replayed on the same two-second cadence as ritual pulses.
                 float pulseTick = (activeTicks - 30.0F) % 40.0F;
                 if (pulseTick < 13.3334F) {
                     applyAll("wave_start", pulseTick / 20.0F);
@@ -79,17 +77,7 @@ public final class RiteOfSeveranceRenderer implements BlockEntityRenderer<RiteOf
         }
 
         poseStack.pushPose();
-        /*
-         * Blockbench's Java/entity coordinate system uses +Y downward while world-space
-         * rendering uses +Y upward. ModelPart already converts cube coordinates from
-         * model pixels to blocks internally, so applying an additional 1/16 scale here
-         * made the altar sixteen times too small.
-         *
-         * The source model is ~39.4 px (2.46 blocks) tall. The model geometry itself
-         * already carries the correct vertical offset, so the renderer should be anchored
-         * directly to the block origin before flipping the Blockbench Y axis.
-         * Z is flipped as well to match the usual Blockbench -> Minecraft model basis.
-         */
+
         poseStack.translate(0.5D, 0.0D, 0.5D);
         poseStack.scale(1.0F, -1.0F, -1.0F);
 

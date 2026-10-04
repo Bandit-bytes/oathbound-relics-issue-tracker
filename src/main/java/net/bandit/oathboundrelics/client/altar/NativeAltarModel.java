@@ -12,7 +12,7 @@ import net.minecraft.client.model.geom.builders.PartDefinition;
 import java.util.HashMap;
 import java.util.Map;
 
-/** Native Minecraft model generated from the original Blockbench altar project. */
+
 public final class NativeAltarModel {
     private final ModelPart root;
     private final Map<String, ModelPart> bones = new HashMap<>();
@@ -23,7 +23,6 @@ public final class NativeAltarModel {
     }
 
     private void index(ModelPart part) {
-        // populated explicitly because ModelPart does not expose its child-name map
     }
 
     public static NativeAltarModel body() { return new NativeAltarModel(bakeBody()); }
