@@ -35,11 +35,7 @@ public final class AttachmentRegistry {
                             .build()
             );
 
-    /**
-     * Legacy covenant marker retained for save compatibility with 1.8.0 test builds.
-     * Death retention is handled by Curios ALWAYS_KEEP and DropRulesEvent instead;
-     * this marker must never be used to manufacture replacement relics on respawn.
-     */
+
     public static final Supplier<AttachmentType<Boolean>> OATHBOUND_BOUND =
             ATTACHMENT_TYPES.register(
                     "oathbound_bound",
@@ -49,14 +45,7 @@ public final class AttachmentRegistry {
                             .build()
             );
 
-    /**
-     * Holds the exact Oathbound Relic ItemStack after a protected death. The stack is
-     * removed from Curios before external grave handlers inspect inventories, then kept
-     * as an inaccessible covenant backup after restoration. This allows Oathbound to
-     * recover from delayed grave/accessory layout replacement (for example when YIGD
-     * claims a grave) without manufacturing a new relic. The backup is cleared only by
-     * legitimate covenant severance.
-     */
+
     public static final Supplier<AttachmentType<ItemStackHandler>> PRESERVED_OATHBOUND_RELIC =
             ATTACHMENT_TYPES.register(
                     "preserved_oathbound_relic",

@@ -539,7 +539,13 @@ public final class OathboundRelicEvents {
             return;
         }
 
-        if (OathboundUtil.isBranded(player) || hasOathboundRelicInVanillaInventory(player)) {
+        if (!player.isAlive() || player.isSpectator()) {
+            return;
+        }
+
+        if (OathboundUtil.hasRelicEquippedRaw(player)
+                || hasOathboundRelicInVanillaInventory(player)
+                || player.containerMenu.getCarried().is(ItemRegistry.OATHBOUND_RELIC.get())) {
             return;
         }
 
@@ -582,11 +588,47 @@ public final class OathboundRelicEvents {
         });
     }
 
+
+    private static void removeDuplicateEquippedRelics(Player player) {
+        CuriosApi.getCuriosInventory(player).ifPresent(curiosInventory -> {
+            var matches = curiosInventory.findCurios(ItemRegistry.OATHBOUND_RELIC.get());
+            if (matches.size() <= 1) {
+                return;
+            }
+
+            OathboundUtil.setDeathPreservationActive(player, true);
+            try {
+                for (int m = 1; m < matches.size(); m++) {
+                    var ctx = matches.get(m).slotContext();
+                    curiosInventory.getStacksHandler(ctx.identifier()).ifPresent(handler -> {
+                        var stacks = ctx.cosmetic() ? handler.getCosmeticStacks() : handler.getStacks();
+                        if (ctx.index() >= 0 && ctx.index() < stacks.getSlots()
+                                && stacks.getStackInSlot(ctx.index()).is(ItemRegistry.OATHBOUND_RELIC.get())) {
+                            stacks.setStackInSlot(ctx.index(), ItemStack.EMPTY);
+                        }
+                    });
+                }
+            } finally {
+                OathboundUtil.setDeathPreservationActive(player, false);
+            }
+            player.containerMenu.broadcastChanges();
+            OathboundRelicsMod.LOGGER.warn(
+                    "Removed {} duplicate Oathbound Relic(s) from {}",
+                    matches.size() - 1,
+                    player.getGameProfile().getName()
+            );
+        });
+    }
+
     @SubscribeEvent
     public static void retryPreservedRelicRestore(PlayerTickEvent.Post event) {
         Player player = event.getEntity();
         if (player.level().isClientSide()) {
             return;
+        }
+
+        if (player.tickCount % 20 == 0) {
+            removeDuplicateEquippedRelics(player);
         }
 
         ItemStack preserved = player

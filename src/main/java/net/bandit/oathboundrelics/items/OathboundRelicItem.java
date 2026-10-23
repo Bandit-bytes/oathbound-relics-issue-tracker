@@ -62,7 +62,7 @@ public class OathboundRelicItem extends Item implements ICurioItem {
         if (!(slotContext.entity() instanceof Player player)) {
             return false;
         }
-        return !OathboundUtil.isBranded(player);
+        return !OathboundUtil.hasRelicEquippedRaw(player);
     }
 
     @Override

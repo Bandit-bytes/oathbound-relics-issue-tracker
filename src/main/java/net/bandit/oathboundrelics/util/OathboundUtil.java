@@ -31,6 +31,16 @@ public final class OathboundUtil {
         return hasCurio(player, ItemRegistry.OATHBOUND_RELIC.get());
     }
 
+
+    public static boolean hasRelicEquippedRaw(Player player) {
+        if (player == null) {
+            return false;
+        }
+        return CuriosApi.getCuriosInventory(player)
+                .map(inv -> !inv.findCurios(ItemRegistry.OATHBOUND_RELIC.get()).isEmpty())
+                .orElse(false);
+    }
+
     public static boolean hasCurio(Player player, Item item) {
         if (player == null || player.isSpectator()) {
             return false;
