@@ -204,6 +204,7 @@ public class OathboundRelicItem extends Item implements ICurioItem {
 
         addCurseLine(tooltip, OathboundConfig.enableBloodToll(),
                 "tooltip.oathboundrelics.oathbound_relic.curse_4",
+                secondsFromTicks(OathboundConfig.bloodTollCooldownTicks()),
                 formatDecimal(OathboundConfig.bloodTollHealthCost()));
 
         addCurseLine(tooltip, OathboundConfig.enableLivingEmber(),
@@ -212,8 +213,7 @@ public class OathboundRelicItem extends Item implements ICurioItem {
 
         addCurseLine(tooltip, OathboundConfig.enableSoulFracture(),
                 "tooltip.oathboundrelics.oathbound_relic.curse_6",
-                secondsFromTicks(OathboundConfig.respawnWeaknessDurationTicks()),
-                secondsFromTicks(OathboundConfig.respawnSlownessDurationTicks()));
+                soulFracturePenalty());
 
         addCurseLine(tooltip, OathboundConfig.enableWakefulDoom(),
                 "tooltip.oathboundrelics.oathbound_relic.curse_7");
@@ -305,6 +305,25 @@ public class OathboundRelicItem extends Item implements ICurioItem {
                     Component.translatable(key, args)
             ).withStyle(ChatFormatting.DARK_GRAY));
         }
+    }
+
+    // Effects with a duration of 0 are never applied on respawn, so leave them out of the tooltip.
+    private static Component soulFracturePenalty() {
+        int weaknessTicks = OathboundConfig.respawnWeaknessDurationTicks();
+        int slownessTicks = OathboundConfig.respawnSlownessDurationTicks();
+        String prefix = "tooltip.oathboundrelics.oathbound_relic.curse_6.";
+
+        if (weaknessTicks > 0 && slownessTicks > 0) {
+            return Component.translatable(prefix + "both",
+                    secondsFromTicks(weaknessTicks), secondsFromTicks(slownessTicks));
+        }
+        if (weaknessTicks > 0) {
+            return Component.translatable(prefix + "weakness", secondsFromTicks(weaknessTicks));
+        }
+        if (slownessTicks > 0) {
+            return Component.translatable(prefix + "slowness", secondsFromTicks(slownessTicks));
+        }
+        return Component.empty();
     }
 
     private static void addBlessingLine(List<Component> tooltip, boolean enabled, String key, Object... args) {
