@@ -1,0 +1,28 @@
+{
+  "name": "Free-Bound Relics III",
+  "icon": "oathboundrelics:elixir_of_eternal_dusk",
+  "category": "oathboundrelics:10_relics_and_curios",
+  "sortnum": 25,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "oathboundrelics:pendant_of_the_drowned_choir",
+      "text": "Your breath lasts far longer underwater, and you mine underwater at full speed. Found in $(thing)shipwreck treasure$(), $(thing)ocean ruins$(), and rare trail ruins."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "oathboundrelics:phial_of_quenched_embers",
+      "text": "Fire burns on you for $(l)half as long$(), and you take $(l)30% less fire damage$(). Any wearer can use it, but Branded bearers fighting $(l)Living Ember$() will be glad of it."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "oathboundrelics:elixir_of_eternal_dusk",
+      "text": "At light level 7 or lower, gain $(l)+10% movement speed$() and $(l)+15% attack damage$(). A relic for caves, deep dark, and night raids."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "oathboundrelics:clot_of_stubborn_ichor",
+      "text": "Grants $(l)+1 max heart$(). When a hit leaves you below half health, gain $(l)Regeneration I$() for 4s. Cooldown: $(l)20 seconds$()."
+    }
+  ]
+}

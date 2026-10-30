@@ -3,6 +3,8 @@
   "values": [
     "oathboundrelics:aredrite_ore",
     "oathboundrelics:aredrite_block",
-    "oathboundrelics:soul_lantern"
+    "oathboundrelics:soul_lantern",
+    "oathboundrelics:rite_of_repose",
+    "oathboundrelics:rite_of_severance"
   ]
 }

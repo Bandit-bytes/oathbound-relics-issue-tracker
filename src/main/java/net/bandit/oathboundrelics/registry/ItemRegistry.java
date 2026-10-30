@@ -162,6 +162,60 @@ public final class ItemRegistry {
             new Item.Properties().stacksTo(1).rarity(Rarity.RARE).fireResistant()
     );
 
+    public static final Supplier<Item> KEY_OF_THE_SEALED_ABYSS = ITEMS.registerItem(
+            "key_of_the_sealed_abyss",
+            KeyOfTheSealedAbyssItem::new,
+            new Item.Properties().stacksTo(1).rarity(Rarity.EPIC).fireResistant()
+    );
+
+    public static final Supplier<Item> KNELL_OF_THE_FORSWORN = ITEMS.registerItem(
+            "knell_of_the_forsworn",
+            KnellOfTheForswornItem::new,
+            new Item.Properties().stacksTo(1).rarity(Rarity.RARE).fireResistant()
+    );
+
+    public static final Supplier<Item> CHALICE_OF_THE_BLOODSWORN = ITEMS.registerItem(
+            "chalice_of_the_bloodsworn",
+            ChaliceOfTheBloodswornItem::new,
+            new Item.Properties().stacksTo(1).rarity(Rarity.RARE).fireResistant()
+    );
+
+    public static final Supplier<Item> SCOURGEBORNE_AMULET = ITEMS.registerItem(
+            "scourgeborne_amulet",
+            ScourgeborneAmuletItem::new,
+            new Item.Properties().stacksTo(1).rarity(Rarity.RARE).fireResistant()
+    );
+
+    public static final Supplier<Item> PENDANT_OF_THE_DROWNED_CHOIR = ITEMS.registerItem(
+            "pendant_of_the_drowned_choir",
+            PendantOfTheDrownedChoirItem::new,
+            new Item.Properties().stacksTo(1).rarity(Rarity.RARE).fireResistant()
+    );
+
+    public static final Supplier<Item> PHIAL_OF_QUENCHED_EMBERS = ITEMS.registerItem(
+            "phial_of_quenched_embers",
+            PhialOfQuenchedEmbersItem::new,
+            new Item.Properties().stacksTo(1).rarity(Rarity.RARE).fireResistant()
+    );
+
+    public static final Supplier<Item> ELIXIR_OF_ETERNAL_DUSK = ITEMS.registerItem(
+            "elixir_of_eternal_dusk",
+            ElixirOfEternalDuskItem::new,
+            new Item.Properties().stacksTo(1).rarity(Rarity.RARE).fireResistant()
+    );
+
+    public static final Supplier<Item> CLOT_OF_STUBBORN_ICHOR = ITEMS.registerItem(
+            "clot_of_stubborn_ichor",
+            ClotOfStubbornIchorItem::new,
+            new Item.Properties().stacksTo(1).rarity(Rarity.RARE).fireResistant()
+    );
+
+    public static final Supplier<Item> SOMNOLENT_DUST = ITEMS.registerItem(
+            "somnolent_dust",
+            SomnolentDustItem::new,
+            new Item.Properties().stacksTo(64).rarity(Rarity.UNCOMMON)
+    );
+
     public static final Supplier<Item> GOLD_RING = ITEMS.registerItem(
             "gold_ring",
             GoldRingItem::new,

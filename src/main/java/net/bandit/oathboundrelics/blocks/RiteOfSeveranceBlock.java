@@ -4,6 +4,7 @@ import com.mojang.serialization.MapCodec;
 import net.bandit.oathboundrelics.blocks.blockentity.RiteOfSeveranceBlockEntity;
 import net.bandit.oathboundrelics.registry.BlockEntityRegistry;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -43,6 +44,17 @@ public class RiteOfSeveranceBlock extends BaseEntityBlock {
         }
 
         return altar.onUsed(player);
+    }
+
+    @Override
+    protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
+        if (!state.is(newState.getBlock())
+                && level instanceof ServerLevel serverLevel
+                && level.getBlockEntity(pos) instanceof RiteOfSeveranceBlockEntity altar) {
+            altar.onAltarRemoved(serverLevel);
+        }
+
+        super.onRemove(state, level, pos, newState, movedByPiston);
     }
 
     @Override

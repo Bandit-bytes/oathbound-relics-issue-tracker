@@ -10,7 +10,8 @@
         { "type": "minecraft:item", "name": "oathboundrelics:skybrand_feather", "weight": 1 },
         { "type": "minecraft:item", "name": "oathboundrelics:void_pearl", "weight": 1 },
         { "type": "minecraft:item", "name": "oathboundrelics:brandkeepers_mercy", "weight": 1 },
-        { "type": "minecraft:item", "name": "oathboundrelics:oblivion_stone", "weight": 1 }
+        { "type": "minecraft:item", "name": "oathboundrelics:oblivion_stone", "weight": 1 },
+        { "type": "minecraft:item", "name": "oathboundrelics:key_of_the_sealed_abyss", "weight": 2 }
       ]
     }
   ]

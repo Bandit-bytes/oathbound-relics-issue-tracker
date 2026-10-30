@@ -43,6 +43,11 @@
           "type": "minecraft:item",
           "name": "oathboundrelics:oblivion_stone",
           "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "name": "oathboundrelics:scourgeborne_amulet",
+          "weight": 2
         }
       ]
     }

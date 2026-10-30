@@ -35,7 +35,7 @@ import net.minecraft.world.phys.AABB;
 
 import java.util.UUID;
 
-public class RiteOfSeveranceBlockEntity extends BlockEntity {
+public class RiteOfSeveranceBlockEntity extends BlockEntity implements AnimatedAltar {
 
     private static final ResourceLocation RITUAL_ARMOR_PENALTY_ID =
             ResourceLocation.fromNamespaceAndPath(OathboundRelicsMod.MOD_ID, "rite_of_severance_armor_penalty");
@@ -436,6 +436,19 @@ public class RiteOfSeveranceBlockEntity extends BlockEntity {
         );
 
         reset();
+    }
+
+    // Called when the altar block is broken or replaced mid-rite, before the block entity is discarded.
+    public void onAltarRemoved(ServerLevel level) {
+        if (!active) {
+            return;
+        }
+
+        ServerPlayer player = activePlayerUuid == null
+                ? null
+                : level.getServer().getPlayerList().getPlayer(activePlayerUuid);
+
+        fail(level, player, "message.oathboundrelics.severance.failed_altar_broken");
     }
 
     private void fail(ServerLevel level, ServerPlayer player, String messageKey) {

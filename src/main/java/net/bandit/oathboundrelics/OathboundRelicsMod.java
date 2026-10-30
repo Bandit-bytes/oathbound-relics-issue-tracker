@@ -24,6 +24,7 @@ public final class OathboundRelicsMod {
         EffectRegistry.register(modBus);
         EntityRegistry.register(modBus);
         AttachmentRegistry.register(modBus);
+        IngredientRegistry.register(modBus);
 
         modContainer.registerConfig(ModConfig.Type.SERVER, OathboundConfig.SPEC);
     }

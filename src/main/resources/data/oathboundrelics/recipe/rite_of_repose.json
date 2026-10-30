@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "DPD",
+    "PBP",
+    "DPD"
+  ],
+  "key": {
+    "D": {
+      "item": "oathboundrelics:somnolent_dust"
+    },
+    "P": {
+      "item": "minecraft:polished_deepslate"
+    },
+    "B": {
+      "tag": "minecraft:beds"
+    }
+  },
+  "result": {
+    "id": "oathboundrelics:rite_of_repose",
+    "count": 1
+  }
+}

@@ -4,7 +4,7 @@ import net.bandit.oathboundrelics.OathboundRelicsMod;
 import net.bandit.oathboundrelics.client.renderer.HeavyCubeProjectileRenderer;
 import net.bandit.oathboundrelics.client.renderer.SoulGemRenderer;
 import net.bandit.oathboundrelics.client.renderer.SoulLanternCurioRenderer;
-import net.bandit.oathboundrelics.client.altar.RiteOfSeveranceRenderer;
+import net.bandit.oathboundrelics.client.altar.NativeAltarRenderer;
 import net.bandit.oathboundrelics.registry.EntityRegistry;
 import net.bandit.oathboundrelics.registry.ItemRegistry;
 import net.bandit.oathboundrelics.registry.BlockRegistry;
@@ -48,7 +48,11 @@ public final class ClientEvents {
         );
         event.registerBlockEntityRenderer(
                 BlockEntityRegistry.RITE_OF_SEVERANCE_BE.get(),
-                RiteOfSeveranceRenderer::new
+                context -> new NativeAltarRenderer<>(context, NativeAltarRenderer.BODY_HELL)
+        );
+        event.registerBlockEntityRenderer(
+                BlockEntityRegistry.RITE_OF_REPOSE_BE.get(),
+                context -> new NativeAltarRenderer<>(context, NativeAltarRenderer.BODY_STONE)
         );
     }
 }

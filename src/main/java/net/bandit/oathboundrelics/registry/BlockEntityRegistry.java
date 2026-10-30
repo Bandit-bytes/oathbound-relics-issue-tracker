@@ -1,6 +1,7 @@
 package net.bandit.oathboundrelics.registry;
 
 import net.bandit.oathboundrelics.OathboundRelicsMod;
+import net.bandit.oathboundrelics.blocks.blockentity.RiteOfReposeBlockEntity;
 import net.bandit.oathboundrelics.blocks.blockentity.RiteOfSeveranceBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.bus.api.IEventBus;
@@ -18,6 +19,14 @@ public final class BlockEntityRegistry {
                     BlockEntityType.Builder.of(
                             RiteOfSeveranceBlockEntity::new,
                             BlockRegistry.RITE_OF_SEVERANCE.get()
+                    ).build(null)
+            );
+
+    public static final Supplier<BlockEntityType<RiteOfReposeBlockEntity>> RITE_OF_REPOSE_BE =
+            BLOCK_ENTITIES.register("rite_of_repose", () ->
+                    BlockEntityType.Builder.of(
+                            RiteOfReposeBlockEntity::new,
+                            BlockRegistry.RITE_OF_REPOSE.get()
                     ).build(null)
             );
 

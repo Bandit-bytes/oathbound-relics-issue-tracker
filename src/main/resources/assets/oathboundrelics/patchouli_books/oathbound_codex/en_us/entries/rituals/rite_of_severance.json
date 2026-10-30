@@ -2,7 +2,7 @@
   "name": "Rite of Severance",
   "icon": "oathboundrelics:rite_of_severance",
   "category": "oathboundrelics:rituals",
-  "advancement": "oathboundrelics:oathboundrelics:bear_the_oath",
+  "advancement": "oathboundrelics:bear_the_oath",
   "secret": true,
   "sortnum": 10,
   "pages": [
@@ -25,12 +25,12 @@
     {
       "type": "patchouli:text",
       "title": "What Happens",
-      "text": "Once awakened, the altar binds the bearer to itself for $(thing)60 seconds$(). The branded must remain within $(thing)7 blocks$() of the altar or the Rite fails.$(br2)Every few moments the altar forces the curses of the Oath back through the body: flame, weakness, hunger, darkness, shattered protection, and the rage of nearby creatures."
+      "text": "Once awakened, the altar binds the bearer to itself for $(thing)30 seconds$(). The branded must remain within $(thing)7 blocks$() of the altar or the Rite fails.$(br2)Every few moments the altar forces the curses of the Oath back through the body: flame, weakness, hunger, darkness, shattered protection, and the rage of nearby creatures."
     },
     {
       "type": "patchouli:text",
       "title": "Completion",
-      "text": "If the bearer survives, the Relic is $(bold)destroyed$(), the brand is $(bold)cleansed$(), and only a trace remains: $(item)Fractured Relic Ash$().$(br2)Should the bearer flee, die, or lose the Relic before the Rite ends, the Severance fails—and the Oath endures."
+      "text": "If the bearer survives, the Relic is $(bold)destroyed$(), the brand is $(bold)cleansed$(), and only a trace remains: $(item)Fractured Relic Ash$().$(br2)Should the bearer flee, die, or lose the Relic, or should the altar be broken before the Rite ends, the Severance fails—and the Oath endures."
     }
   ]
 }

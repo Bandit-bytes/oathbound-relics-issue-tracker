@@ -1,13 +1,16 @@
 package net.bandit.oathboundrelics.events;
 
 import net.bandit.oathboundrelics.OathboundRelicsMod;
+import net.bandit.oathboundrelics.blocks.blockentity.RiteOfReposeBlockEntity;
 import net.bandit.oathboundrelics.config.OathboundConfig;
 import net.bandit.oathboundrelics.data.BrandedTimeData;
 import net.bandit.oathboundrelics.registry.AttachmentRegistry;
 import net.bandit.oathboundrelics.registry.ItemRegistry;
 import net.bandit.oathboundrelics.util.OathboundUtil;
 import net.bandit.oathboundrelics.util.SlothWeaponUtil;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
+import net.minecraft.network.chat.Component;
 import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -278,7 +281,14 @@ public final class OathboundRelicEvents {
             return;
         }
 
-        player.hurt(player.damageSources().generic(), cost);
+        // Key of the Sealed Abyss: the toll is paid in hunger, unless the bearer is already starving.
+        if (OathboundConfig.enableKeyOfTheSealedAbyss()
+                && OathboundUtil.hasCurio(player, ItemRegistry.KEY_OF_THE_SEALED_ABYSS.get())
+                && player.getFoodData().getFoodLevel() > 0) {
+            player.causeFoodExhaustion((float) (cost * OathboundConfig.keyOfTheSealedAbyssExhaustionPerHealth()));
+        } else {
+            player.hurt(player.damageSources().generic(), cost);
+        }
         setCooldown(BLOOD_TOLL_COOLDOWNS, player, gameTime, OathboundConfig.bloodTollCooldownTicks());
     }
 
@@ -439,11 +449,21 @@ public final class OathboundRelicEvents {
             return;
         }
 
-        if (!OathboundUtil.isBranded(event.getEntity())) {
+        Player player = event.getEntity();
+        if (!OathboundUtil.isBranded(player)) {
+            return;
+        }
+
+        if (OathboundConfig.enableRiteOfRepose()
+                && RiteOfReposeBlockEntity.isWithinRepose(player.level(), event.getPos())) {
             return;
         }
 
         event.setProblem(Player.BedSleepingProblem.OTHER_PROBLEM);
+        player.displayClientMessage(
+                Component.translatable("message.oathboundrelics.wakeful_doom.no_rest").withStyle(ChatFormatting.DARK_PURPLE),
+                true
+        );
     }
 
     @SubscribeEvent

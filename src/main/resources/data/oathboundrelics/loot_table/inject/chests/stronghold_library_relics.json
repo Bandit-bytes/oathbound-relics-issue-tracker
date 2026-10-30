@@ -9,7 +9,9 @@
         { "type": "minecraft:item", "name": "oathboundrelics:oathbound_reliquary", "weight": 1 },
         { "type": "minecraft:item", "name": "oathboundrelics:tablet_of_coveting", "weight": 2 },
         { "type": "minecraft:item", "name": "oathboundrelics:tablet_of_stillness", "weight": 1 },
-        { "type": "minecraft:item", "name": "oathboundrelics:oblivion_stone", "weight": 1 }
+        { "type": "minecraft:item", "name": "oathboundrelics:oblivion_stone", "weight": 1 },
+        { "type": "minecraft:item", "name": "oathboundrelics:knell_of_the_forsworn", "weight": 2 },
+        { "type": "minecraft:item", "name": "oathboundrelics:elixir_of_eternal_dusk", "weight": 2 }
       ]
     }
   ]

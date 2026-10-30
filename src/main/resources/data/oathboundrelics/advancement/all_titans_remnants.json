@@ -1,0 +1,100 @@
+{
+  "parent": "oathboundrelics:end_born_shard",
+  "display": {
+    "icon": {
+      "id": "oathboundrelics:colossus_heart"
+    },
+    "title": {
+      "translate": "advancement.oathboundrelics.all_titans_remnants.title"
+    },
+    "description": {
+      "translate": "advancement.oathboundrelics.all_titans_remnants.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "has_colossus_heart": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "oathboundrelics:colossus_heart"
+          }
+        ]
+      }
+    },
+    "has_ember_seed": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "oathboundrelics:ember_seed"
+          }
+        ]
+      }
+    },
+    "has_tide_pearl": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "oathboundrelics:tide_pearl"
+          }
+        ]
+      }
+    },
+    "has_skybrand_feather": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "oathboundrelics:skybrand_feather"
+          }
+        ]
+      }
+    },
+    "has_nebula_lens": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "oathboundrelics:nebula_lens"
+          }
+        ]
+      }
+    },
+    "has_void_pearl": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "oathboundrelics:void_pearl"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_colossus_heart"
+    ],
+    [
+      "has_ember_seed"
+    ],
+    [
+      "has_tide_pearl"
+    ],
+    [
+      "has_skybrand_feather"
+    ],
+    [
+      "has_nebula_lens"
+    ],
+    [
+      "has_void_pearl"
+    ]
+  ]
+}

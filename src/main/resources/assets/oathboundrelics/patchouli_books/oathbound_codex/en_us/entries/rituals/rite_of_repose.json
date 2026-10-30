@@ -1,0 +1,35 @@
+{
+  "name": "Rite of Repose",
+  "icon": "oathboundrelics:rite_of_repose",
+  "category": "oathboundrelics:rituals",
+  "sortnum": 5,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Rite of Repose",
+      "text": "The Oath denies its bearers sleep. $(l)Wakeful Doom$() follows the Branded to every bed.$(br2)The $(l)Rite of Repose$() is a quiet altar of slate and dreaming dust. Near it, the Oath's grip loosens just enough to let a tired bearer close their eyes."
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "Somnolent Dust",
+      "recipe": "oathboundrelics:somnolent_dust",
+      "text": "Ground from Phantom membrane, amethyst, and glowstone. It glitters like an unfinished dream."
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "The Altar",
+      "recipe": "oathboundrelics:rite_of_repose",
+      "text": "Place the altar near the bed you mean to keep. It asks nothing further of you."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Resting",
+      "text": "While Branded, you may sleep in any bed within $(thing)8 blocks$() of a Rite of Repose. Night, monsters, and every other rule of sleep still apply.$(br2)The altar wakes and glows blue whenever a Branded bearer stands within its reach, so you can see when you are inside its mercy.$(br2)Use the altar to be reminded of its radius."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "What It Does Not Do",
+      "text": "The Rite of Repose does not cleanse the brand, weaken the other curses, or touch the $(item)Oathbound Relic$() at all. It only quiets $(l)Wakeful Doom$().$(br2)To end the Oath itself, see the $(l)Rite of Severance$()."
+    }
+  ]
+}

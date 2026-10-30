@@ -9,7 +9,9 @@
         { "type": "minecraft:item", "name": "oathboundrelics:torch_of_gravesong", "weight": 4 },
         { "type": "minecraft:item", "name": "oathboundrelics:relic_of_the_last_breath", "weight": 2 },
         { "type": "minecraft:item", "name": "oathboundrelics:nail_of_the_first_martyr", "weight": 1 },
-        { "type": "minecraft:item", "name": "oathboundrelics:oblivion_stone", "weight": 1 }
+        { "type": "minecraft:item", "name": "oathboundrelics:oblivion_stone", "weight": 1 },
+        { "type": "minecraft:item", "name": "oathboundrelics:phial_of_quenched_embers", "weight": 4 },
+        { "type": "minecraft:item", "name": "oathboundrelics:scourgeborne_amulet", "weight": 2 }
       ]
     }
   ]

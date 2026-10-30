@@ -10,7 +10,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "$(l)Structure caches$()$(br)$(li)Ancient Cities$(li)Strongholds$(li)Nether Fortresses$(li)Bastion Treasures$(li)Woodland Mansions$(li)End Cities$(li)Desert Pyramids$(li)Jungle Temples$(li)Trail Ruins$(li)Trial Chambers"
+      "text": "$(l)Structure caches$()$(br)$(li)Ancient Cities$(li)Strongholds$(li)Nether Fortresses$(li)Bastion Treasures$(li)Woodland Mansions$(li)End Cities$(li)Desert Pyramids$(li)Jungle Temples$(li)Trail Ruins$(li)Trial Chambers$(li)Shipwrecks and Ocean Ruins"
     },
     {
       "type": "patchouli:text",

@@ -2,7 +2,7 @@ package net.bandit.oathboundrelics.client.altar;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.bandit.oathboundrelics.OathboundRelicsMod;
-import net.bandit.oathboundrelics.blocks.blockentity.RiteOfSeveranceBlockEntity;
+import net.bandit.oathboundrelics.blocks.blockentity.AnimatedAltar;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -10,9 +10,11 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.entity.BlockEntity;
 
-public final class RiteOfSeveranceRenderer implements BlockEntityRenderer<RiteOfSeveranceBlockEntity> {
-    private static final ResourceLocation BODY = tex("wave_altar_hell.png");
+public final class NativeAltarRenderer<T extends BlockEntity & AnimatedAltar> implements BlockEntityRenderer<T> {
+    public static final ResourceLocation BODY_HELL = tex("wave_altar_hell.png");
+    public static final ResourceLocation BODY_STONE = tex("wave_altar_stone.png");
     private static final ResourceLocation LIGHT_RED = tex("altar_lights_red.png");
     private static final ResourceLocation LIGHT_GREEN = tex("altar_lights_green.png");
     private static final ResourceLocation LIGHT_BLUE = tex("altar_lights_blue.png");
@@ -22,6 +24,7 @@ public final class RiteOfSeveranceRenderer implements BlockEntityRenderer<RiteOf
     private static final ResourceLocation AURA_BLUE = tex("wave_altar_blue.png");
     private static final ResourceLocation AURA_PURPLE = tex("wave_altar_purple.png");
 
+    private final ResourceLocation bodyTexture;
     private final NativeAltarModel body = NativeAltarModel.body();
     private final NativeAltarModel[] lights = {
             NativeAltarModel.lightRed(), NativeAltarModel.lightGreen(),
@@ -32,14 +35,15 @@ public final class RiteOfSeveranceRenderer implements BlockEntityRenderer<RiteOf
             NativeAltarModel.auraBlue(), NativeAltarModel.auraPurple()
     };
 
-    public RiteOfSeveranceRenderer(BlockEntityRendererProvider.Context context) {
+    public NativeAltarRenderer(BlockEntityRendererProvider.Context context, ResourceLocation bodyTexture) {
+        this.bodyTexture = bodyTexture;
         registerBaseBones(body);
         for (NativeAltarModel model : lights) registerLightBones(model);
         for (NativeAltarModel model : aura) registerAuraBones(model);
     }
 
     @Override
-    public void render(RiteOfSeveranceBlockEntity altar, float partialTick, PoseStack poseStack,
+    public void render(T altar, float partialTick, PoseStack poseStack,
                        MultiBufferSource buffers, int packedLight, int packedOverlay) {
         float activeTicks = altar.getClientActiveTicks(partialTick);
         float closingTicks = altar.getClientClosingTicks(partialTick);
@@ -61,11 +65,13 @@ public final class RiteOfSeveranceRenderer implements BlockEntityRenderer<RiteOf
                 applyAll("dial_spin", idleSeconds);
                 applyAuraAll("idle", idleSeconds);
 
-                float pulseTick = (activeTicks - 30.0F) % 40.0F;
-                if (pulseTick < 13.3334F) {
-                    applyAll("wave_start", pulseTick / 20.0F);
-                } else if (pulseTick < 20.0F) {
-                    applyAll("wave_end", (pulseTick - 13.3334F) / 20.0F);
+                if (altar.usesWavePulse()) {
+                    float pulseTick = (activeTicks - 30.0F) % 40.0F;
+                    if (pulseTick < 13.3334F) {
+                        applyAll("wave_start", pulseTick / 20.0F);
+                    } else if (pulseTick < 20.0F) {
+                        applyAll("wave_end", (pulseTick - 13.3334F) / 20.0F);
+                    }
                 }
             }
         } else if (closingTicks < 17.5F) {
@@ -81,7 +87,7 @@ public final class RiteOfSeveranceRenderer implements BlockEntityRenderer<RiteOf
         poseStack.translate(0.5D, 0.0D, 0.5D);
         poseStack.scale(1.0F, -1.0F, -1.0F);
 
-        body.render(poseStack, buffers.getBuffer(RenderType.entityCutoutNoCull(BODY)), packedLight, OverlayTexture.NO_OVERLAY);
+        body.render(poseStack, buffers.getBuffer(RenderType.entityCutoutNoCull(bodyTexture)), packedLight, OverlayTexture.NO_OVERLAY);
 
         if (altar.isActive() || closingTicks < 17.5F) {
             int color = altar.getClientRitualColorIndex();
@@ -106,7 +112,7 @@ public final class RiteOfSeveranceRenderer implements BlockEntityRenderer<RiteOf
     }
 
     @Override
-    public boolean shouldRenderOffScreen(RiteOfSeveranceBlockEntity blockEntity) {
+    public boolean shouldRenderOffScreen(T blockEntity) {
         return true;
     }
 

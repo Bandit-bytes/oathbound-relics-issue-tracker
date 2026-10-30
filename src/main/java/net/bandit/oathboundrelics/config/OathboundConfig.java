@@ -231,6 +231,54 @@ public final class OathboundConfig {
     public final ModConfigSpec.IntValue nebulaRingExtraRingSlots;
     public final ModConfigSpec.IntValue FracturedRingExtraRingSlots;
 
+    // Rite of Repose
+    public final ModConfigSpec.BooleanValue enableRiteOfRepose;
+    public final ModConfigSpec.DoubleValue riteOfReposeRadius;
+
+    // Bound curios (second wave)
+    public final ModConfigSpec.BooleanValue enableKeyOfTheSealedAbyss;
+    public final ModConfigSpec.DoubleValue keyOfTheSealedAbyssExhaustionPerHealth;
+
+    public final ModConfigSpec.BooleanValue enableKnellOfTheForsworn;
+    public final ModConfigSpec.DoubleValue knellHealthThreshold;
+    public final ModConfigSpec.DoubleValue knellRadius;
+    public final ModConfigSpec.DoubleValue knellKnockback;
+    public final ModConfigSpec.IntValue knellWeaknessDurationTicks;
+    public final ModConfigSpec.IntValue knellWeaknessAmplifier;
+    public final ModConfigSpec.IntValue knellSlownessDurationTicks;
+    public final ModConfigSpec.IntValue knellSlownessAmplifier;
+    public final ModConfigSpec.IntValue knellCooldownTicks;
+
+    public final ModConfigSpec.BooleanValue enableChaliceOfTheBloodsworn;
+    public final ModConfigSpec.DoubleValue chaliceLifestealPercent;
+    public final ModConfigSpec.DoubleValue chaliceMaxHealPerHit;
+    public final ModConfigSpec.DoubleValue chaliceExhaustionPerHit;
+
+    public final ModConfigSpec.BooleanValue enableScourgeborneAmulet;
+    public final ModConfigSpec.DoubleValue scourgeborneReductionPerEffect;
+    public final ModConfigSpec.DoubleValue scourgeborneMaxReduction;
+
+    // Free relics (second wave)
+    public final ModConfigSpec.BooleanValue enableDrownedChoirPendant;
+    public final ModConfigSpec.DoubleValue drownedChoirOxygenBonus;
+    public final ModConfigSpec.DoubleValue drownedChoirSubmergedMiningSpeedBonus;
+
+    public final ModConfigSpec.BooleanValue enablePhialOfQuenchedEmbers;
+    public final ModConfigSpec.DoubleValue phialBurningTimeReduction;
+    public final ModConfigSpec.DoubleValue phialFireDamageMultiplier;
+
+    public final ModConfigSpec.BooleanValue enableElixirOfEternalDusk;
+    public final ModConfigSpec.IntValue elixirLightThreshold;
+    public final ModConfigSpec.DoubleValue elixirMovementSpeedBonus;
+    public final ModConfigSpec.DoubleValue elixirAttackDamageBonus;
+
+    public final ModConfigSpec.BooleanValue enableClotOfStubbornIchor;
+    public final ModConfigSpec.DoubleValue clotMaxHealthBonus;
+    public final ModConfigSpec.DoubleValue clotHealthThreshold;
+    public final ModConfigSpec.IntValue clotRegenerationDurationTicks;
+    public final ModConfigSpec.IntValue clotRegenerationAmplifier;
+    public final ModConfigSpec.IntValue clotCooldownTicks;
+
     // Expanded Sloth weapon
     public final ModConfigSpec.BooleanValue enableCreativeBrandedTimeBypass;
     public final ModConfigSpec.IntValue lethargicFlailLazinessDurationTicks;
@@ -625,6 +673,72 @@ public final class OathboundConfig {
                 .defineInRange("movementSpeedBonus", 0.10D, 0.0D, 10.0D);
         builder.pop();
 
+        builder.push("key_of_the_sealed_abyss");
+        enableKeyOfTheSealedAbyss = builder
+                .comment("If true, Key of the Sealed Abyss makes Blood Toll drain hunger instead of health.")
+                .define("enabled", true);
+        keyOfTheSealedAbyssExhaustionPerHealth = builder
+                .comment("Food exhaustion paid per point of Blood Toll health cost. 4.0 exhaustion = 1 hunger point.")
+                .defineInRange("exhaustionPerHealth", 4.0D, 0.0D, 40.0D);
+        builder.pop();
+
+        builder.push("knell_of_the_forsworn");
+        enableKnellOfTheForsworn = builder
+                .comment("If true, Knell of the Forsworn repels nearby monsters when the bearer is struck to low health.")
+                .define("enabled", true);
+        knellHealthThreshold = builder
+                .comment("Health fraction at or below which the Knell tolls. 0.40 = 40% of max health.")
+                .defineInRange("healthThreshold", 0.40D, 0.0D, 1.0D);
+        knellRadius = builder
+                .comment("Radius in blocks of the toll.")
+                .defineInRange("radius", 6.0D, 1.0D, 64.0D);
+        knellKnockback = builder
+                .comment("Knockback strength applied to monsters caught in the toll.")
+                .defineInRange("knockback", 1.2D, 0.0D, 10.0D);
+        knellWeaknessDurationTicks = builder
+                .comment("Weakness duration in ticks.")
+                .defineInRange("weaknessDurationTicks", 20 * 5, 0, 20 * 60 * 60);
+        knellWeaknessAmplifier = builder
+                .comment("Weakness amplifier. 0 = Weakness I.")
+                .defineInRange("weaknessAmplifier", 0, 0, 255);
+        knellSlownessDurationTicks = builder
+                .comment("Slowness duration in ticks.")
+                .defineInRange("slownessDurationTicks", 20 * 5, 0, 20 * 60 * 60);
+        knellSlownessAmplifier = builder
+                .comment("Slowness amplifier. 0 = Slowness I.")
+                .defineInRange("slownessAmplifier", 0, 0, 255);
+        knellCooldownTicks = builder
+                .comment("Cooldown in ticks.")
+                .defineInRange("cooldownTicks", 20 * 30, 0, 20 * 60 * 60);
+        builder.pop();
+
+        builder.push("chalice_of_the_bloodsworn");
+        enableChaliceOfTheBloodsworn = builder
+                .comment("If true, Chalice of the Bloodsworn heals the bearer from melee damage dealt.")
+                .define("enabled", true);
+        chaliceLifestealPercent = builder
+                .comment("Fraction of melee damage dealt returned as healing. 0.10 = 10%.")
+                .defineInRange("lifestealPercent", 0.10D, 0.0D, 1.0D);
+        chaliceMaxHealPerHit = builder
+                .comment("Maximum health restored by a single hit.")
+                .defineInRange("maxHealPerHit", 3.0D, 0.0D, 100.0D);
+        chaliceExhaustionPerHit = builder
+                .comment("Food exhaustion added each time the Chalice drinks.")
+                .defineInRange("exhaustionPerHit", 0.4D, 0.0D, 40.0D);
+        builder.pop();
+
+        builder.push("scourgeborne_amulet");
+        enableScourgeborneAmulet = builder
+                .comment("If true, Scourgeborne Amulet reduces incoming damage for each harmful effect on the bearer.")
+                .define("enabled", true);
+        scourgeborneReductionPerEffect = builder
+                .comment("Damage reduction per harmful effect. 0.06 = 6% less damage per effect.")
+                .defineInRange("reductionPerEffect", 0.06D, 0.0D, 1.0D);
+        scourgeborneMaxReduction = builder
+                .comment("Maximum total damage reduction. 0.30 = 30%.")
+                .defineInRange("maxReduction", 0.30D, 0.0D, 1.0D);
+        builder.pop();
+
         builder.pop();
 
         builder.push("free_relics");
@@ -782,6 +896,66 @@ public final class OathboundConfig {
         torchOfGravesongStrengthAmplifier = builder
                 .comment("Strength amplifier. 0 = Strength I.")
                 .defineInRange("strengthAmplifier", 0, 0, 255);
+        builder.pop();
+
+        builder.push("pendant_of_the_drowned_choir");
+        enableDrownedChoirPendant = builder
+                .comment("If true, Pendant of the Drowned Choir improves breathing and mining underwater.")
+                .define("enabled", true);
+        drownedChoirOxygenBonus = builder
+                .comment("Oxygen Bonus attribute granted. Higher values make air drain more slowly underwater.")
+                .defineInRange("oxygenBonus", 2.0D, 0.0D, 1024.0D);
+        drownedChoirSubmergedMiningSpeedBonus = builder
+                .comment("Submerged Mining Speed bonus. Vanilla base is 0.2, so 0.8 removes the underwater mining penalty.")
+                .defineInRange("submergedMiningSpeedBonus", 0.8D, 0.0D, 20.0D);
+        builder.pop();
+
+        builder.push("phial_of_quenched_embers");
+        enablePhialOfQuenchedEmbers = builder
+                .comment("If true, Phial of Quenched Embers shortens burning and softens fire damage.")
+                .define("enabled", true);
+        phialBurningTimeReduction = builder
+                .comment("Fraction removed from burning time. 0.5 = fire lasts half as long.")
+                .defineInRange("burningTimeReduction", 0.5D, 0.0D, 1.0D);
+        phialFireDamageMultiplier = builder
+                .comment("Multiplier applied to incoming fire damage. 0.70 = take 30% less fire damage.")
+                .defineInRange("fireDamageMultiplier", 0.70D, 0.0D, 10.0D);
+        builder.pop();
+
+        builder.push("elixir_of_eternal_dusk");
+        enableElixirOfEternalDusk = builder
+                .comment("If true, Elixir of Eternal Dusk empowers the bearer while standing in darkness.")
+                .define("enabled", true);
+        elixirLightThreshold = builder
+                .comment("Light level at or below which the Elixir awakens.")
+                .defineInRange("lightThreshold", 7, 0, 15);
+        elixirMovementSpeedBonus = builder
+                .comment("Movement speed bonus in darkness. 0.10 = +10%.")
+                .defineInRange("movementSpeedBonus", 0.10D, 0.0D, 10.0D);
+        elixirAttackDamageBonus = builder
+                .comment("Attack damage bonus in darkness. 0.15 = +15%.")
+                .defineInRange("attackDamageBonus", 0.15D, 0.0D, 10.0D);
+        builder.pop();
+
+        builder.push("clot_of_stubborn_ichor");
+        enableClotOfStubbornIchor = builder
+                .comment("If true, Clot of Stubborn Ichor grants max health and emergency regeneration.")
+                .define("enabled", true);
+        clotMaxHealthBonus = builder
+                .comment("Max health bonus. 2.0 = 1 heart.")
+                .defineInRange("maxHealthBonus", 2.0D, 0.0D, 1024.0D);
+        clotHealthThreshold = builder
+                .comment("Health fraction at or below which a hit triggers regeneration. 0.50 = 50% of max health.")
+                .defineInRange("healthThreshold", 0.50D, 0.0D, 1.0D);
+        clotRegenerationDurationTicks = builder
+                .comment("Regeneration duration in ticks.")
+                .defineInRange("regenerationDurationTicks", 20 * 4, 0, 20 * 60 * 60);
+        clotRegenerationAmplifier = builder
+                .comment("Regeneration amplifier. 0 = Regeneration I.")
+                .defineInRange("regenerationAmplifier", 0, 0, 255);
+        clotCooldownTicks = builder
+                .comment("Cooldown in ticks.")
+                .defineInRange("cooldownTicks", 20 * 20, 0, 20 * 60 * 60);
         builder.pop();
 
         builder.pop();
@@ -1273,6 +1447,15 @@ public final class OathboundConfig {
         builder.pop();
 
         builder.pop();
+
+        builder.push("rite_of_repose");
+        enableRiteOfRepose = builder
+                .comment("If true, Branded players may sleep in beds near a Rite of Repose despite Wakeful Doom.")
+                .define("enabled", true);
+        riteOfReposeRadius = builder
+                .comment("Radius in blocks around the Rite of Repose in which a bed may be used.")
+                .defineInRange("radius", 8.0D, 1.0D, 64.0D);
+        builder.pop();
     }
 
     public static boolean enableFrailty() { return CONFIG.enableFrailty.get(); }
@@ -1555,6 +1738,51 @@ public final class OathboundConfig {
     public static boolean giveStarterOathboundRelic() { return CONFIG.giveStarterOathboundRelic.get(); }
     public static boolean enableBrandkeepersMercy() { return CONFIG.enableBrandkeepersMercy.get(); }
     public static int bloodTollCooldownTicks() { return CONFIG.bloodTollCooldownTicks.get(); }
+
+    public static boolean enableRiteOfRepose() { return CONFIG.enableRiteOfRepose.get(); }
+    public static double riteOfReposeRadius() { return CONFIG.riteOfReposeRadius.get(); }
+
+    public static boolean enableKeyOfTheSealedAbyss() { return CONFIG.enableKeyOfTheSealedAbyss.get(); }
+    public static double keyOfTheSealedAbyssExhaustionPerHealth() { return CONFIG.keyOfTheSealedAbyssExhaustionPerHealth.get(); }
+
+    public static boolean enableKnellOfTheForsworn() { return CONFIG.enableKnellOfTheForsworn.get(); }
+    public static double knellHealthThreshold() { return CONFIG.knellHealthThreshold.get(); }
+    public static double knellRadius() { return CONFIG.knellRadius.get(); }
+    public static double knellKnockback() { return CONFIG.knellKnockback.get(); }
+    public static int knellWeaknessDurationTicks() { return CONFIG.knellWeaknessDurationTicks.get(); }
+    public static int knellWeaknessAmplifier() { return CONFIG.knellWeaknessAmplifier.get(); }
+    public static int knellSlownessDurationTicks() { return CONFIG.knellSlownessDurationTicks.get(); }
+    public static int knellSlownessAmplifier() { return CONFIG.knellSlownessAmplifier.get(); }
+    public static int knellCooldownTicks() { return CONFIG.knellCooldownTicks.get(); }
+
+    public static boolean enableChaliceOfTheBloodsworn() { return CONFIG.enableChaliceOfTheBloodsworn.get(); }
+    public static double chaliceLifestealPercent() { return CONFIG.chaliceLifestealPercent.get(); }
+    public static double chaliceMaxHealPerHit() { return CONFIG.chaliceMaxHealPerHit.get(); }
+    public static double chaliceExhaustionPerHit() { return CONFIG.chaliceExhaustionPerHit.get(); }
+
+    public static boolean enableScourgeborneAmulet() { return CONFIG.enableScourgeborneAmulet.get(); }
+    public static double scourgeborneReductionPerEffect() { return CONFIG.scourgeborneReductionPerEffect.get(); }
+    public static double scourgeborneMaxReduction() { return CONFIG.scourgeborneMaxReduction.get(); }
+
+    public static boolean enableDrownedChoirPendant() { return CONFIG.enableDrownedChoirPendant.get(); }
+    public static double drownedChoirOxygenBonus() { return CONFIG.drownedChoirOxygenBonus.get(); }
+    public static double drownedChoirSubmergedMiningSpeedBonus() { return CONFIG.drownedChoirSubmergedMiningSpeedBonus.get(); }
+
+    public static boolean enablePhialOfQuenchedEmbers() { return CONFIG.enablePhialOfQuenchedEmbers.get(); }
+    public static double phialBurningTimeReduction() { return CONFIG.phialBurningTimeReduction.get(); }
+    public static double phialFireDamageMultiplier() { return CONFIG.phialFireDamageMultiplier.get(); }
+
+    public static boolean enableElixirOfEternalDusk() { return CONFIG.enableElixirOfEternalDusk.get(); }
+    public static int elixirLightThreshold() { return CONFIG.elixirLightThreshold.get(); }
+    public static double elixirMovementSpeedBonus() { return CONFIG.elixirMovementSpeedBonus.get(); }
+    public static double elixirAttackDamageBonus() { return CONFIG.elixirAttackDamageBonus.get(); }
+
+    public static boolean enableClotOfStubbornIchor() { return CONFIG.enableClotOfStubbornIchor.get(); }
+    public static double clotMaxHealthBonus() { return CONFIG.clotMaxHealthBonus.get(); }
+    public static double clotHealthThreshold() { return CONFIG.clotHealthThreshold.get(); }
+    public static int clotRegenerationDurationTicks() { return CONFIG.clotRegenerationDurationTicks.get(); }
+    public static int clotRegenerationAmplifier() { return CONFIG.clotRegenerationAmplifier.get(); }
+    public static int clotCooldownTicks() { return CONFIG.clotCooldownTicks.get(); }
 
     public static List<? extends String> oathboundRelicCustomAttributes() {
         return CONFIG.oathboundRelicCustomAttributes.get();

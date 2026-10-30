@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:smelting",
+  "cookingtime": 200,
+  "experience": 1.0,
+  "ingredient": {
+    "type": "oathboundrelics:dormant_remnant",
+    "base": [
+      { "item": "oathboundrelics:colossus_heart" },
+      { "item": "oathboundrelics:ember_seed" },
+      { "item": "oathboundrelics:tide_pearl" },
+      { "item": "oathboundrelics:skybrand_feather" },
+      { "item": "oathboundrelics:nebula_lens" },
+      { "item": "oathboundrelics:void_pearl" }
+    ]
+  },
+  "result": {
+    "id": "oathboundrelics:oblivion_stone"
+  }
+}
